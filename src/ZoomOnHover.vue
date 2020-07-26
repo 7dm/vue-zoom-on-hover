@@ -47,10 +47,10 @@ export default {
       this.zoomed = false;
     },
     move: function(event) {
-      if (this.disabled || !this.zoomed) return;
-      let offset = this.pageOffset(this.$el);
       let zoom = this.$refs.zoom;
       let normal = this.$refs.normal;
+      if (this.disabled || !this.zoomed || !zoom || !normal) return;
+      let offset = this.pageOffset(this.$el);
       let relativeX = event.clientX - offset.x + window.pageXOffset;
       let relativeY = event.clientY - offset.y + window.pageYOffset;
       let normalFactorX = relativeX / normal.offsetWidth;

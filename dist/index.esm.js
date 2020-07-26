@@ -51,10 +51,10 @@ var script = {
       this.zoomed = false;
     },
     move: function move(event) {
-      if (this.disabled || !this.zoomed) return;
-      var offset = this.pageOffset(this.$el);
       var zoom = this.$refs.zoom;
       var normal = this.$refs.normal;
+      if (this.disabled || !this.zoomed || !zoom || !normal) return;
+      var offset = this.pageOffset(this.$el);
       var relativeX = event.clientX - offset.x + window.pageXOffset;
       var relativeY = event.clientY - offset.y + window.pageYOffset;
       var normalFactorX = relativeX / normal.offsetWidth;
@@ -295,8 +295,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3cfe3558_0", {
-    source: ".zoom-on-hover[data-v-3cfe3558]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-3cfe3558]{width:100%}.zoom-on-hover .zoom[data-v-3cfe3558]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-3cfe3558]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-3cfe3558]{opacity:0}",
+  inject("data-v-5a7b7ad4_0", {
+    source: ".zoom-on-hover[data-v-5a7b7ad4]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-5a7b7ad4]{width:100%}.zoom-on-hover .zoom[data-v-5a7b7ad4]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-5a7b7ad4]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-5a7b7ad4]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -304,7 +304,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-3cfe3558";
+var __vue_scope_id__ = "data-v-5a7b7ad4";
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;
