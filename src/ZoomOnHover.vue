@@ -1,6 +1,8 @@
 <template>
   <div
     class="zoom-on-hover"
+    v-bind:class="{ zoomed }"
+    @touchstart="touchzoom"
     @mousemove="move"
     @mouseenter="zoom"
     @mouseleave="unzoom"
@@ -15,7 +17,8 @@ export default {
   data() {
     return {
       scaleFactor: 1,
-      resizeCheckInterval: null
+      resizeCheckInterval: null,
+      zoomed: false,
     };
   },
   methods: {
@@ -30,18 +33,21 @@ export default {
         x: rect.left + scrollLeft
       };
     },
+    touchzoom: function (event) {
+      if (this.disabled) return;
+      this.move(event);
+      this.zoomed = !this.zoomed;
+    },
     zoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 1;
-      this.$refs.normal.style.opacity = 0;
+      this.zoomed = true;
     },
     unzoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 0;
-      this.$refs.normal.style.opacity = 1;
+      this.zoomed = false;
     },
     move: function(event) {
-      if (this.disabled) return;
+      if (this.disabled || !this.zoomed) return;
       let offset = this.pageOffset(this.$el);
       let zoom = this.$refs.zoom;
       let normal = this.$refs.normal;
@@ -121,5 +127,11 @@ export default {
   position: absolute;
   opacity: 0;
   transform-origin: top left;
+}
+.zoom-on-hover.zoomed .zoom {
+  opacity: 1;
+}
+.zoom-on-hover.zoomed .normal {
+  opacity: 0;
 }
 </style>
