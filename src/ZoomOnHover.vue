@@ -2,10 +2,11 @@
   <div
     class="zoom-on-hover"
     v-bind:class="{ zoomed }"
-    @touchstart="touchzoom"
-    @mousemove="move"
-    @mouseenter="zoom"
-    @mouseleave="unzoom"
+    @pointerover="touchzoom"
+    @pointerout="touchzoom"
+    @pointermove="move"
+    @pointerenter="zoom"
+    @pointerleave="unzoom"
   >
     <img class="normal" ref="normal" :src="imgNormal" />
     <img class="zoom" ref="zoom" :src="imgZoom || imgNormal" />
@@ -35,8 +36,8 @@ export default {
     },
     touchzoom: function (event) {
       if (this.disabled) return;
+      this.zoomed = event.type === "pointerover";
       this.move(event);
-      this.zoomed = !this.zoomed;
     },
     zoom() {
       if (this.disabled) return;

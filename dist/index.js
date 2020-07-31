@@ -18,6 +18,7 @@
 //
 //
 //
+//
 var script = {
   props: ["imgNormal", "imgZoom", "scale", "disabled"],
   data: function data() {
@@ -41,8 +42,8 @@ var script = {
     },
     touchzoom: function touchzoom(event) {
       if (this.disabled) return;
+      this.zoomed = event.type === "pointerover";
       this.move(event);
-      this.zoomed = !this.zoomed;
     },
     zoom: function zoom() {
       if (this.disabled) return;
@@ -272,10 +273,11 @@ var __vue_render__ = function __vue_render__() {
       zoomed: _vm.zoomed
     },
     on: {
-      "touchstart": _vm.touchzoom,
-      "mousemove": _vm.move,
-      "mouseenter": _vm.zoom,
-      "mouseleave": _vm.unzoom
+      "pointerover": _vm.touchzoom,
+      "pointerout": _vm.touchzoom,
+      "pointermove": _vm.move,
+      "pointerenter": _vm.zoom,
+      "pointerleave": _vm.unzoom
     }
   }, [_c('img', {
     ref: "normal",
@@ -297,8 +299,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-5a7b7ad4_0", {
-    source: ".zoom-on-hover[data-v-5a7b7ad4]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-5a7b7ad4]{width:100%}.zoom-on-hover .zoom[data-v-5a7b7ad4]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-5a7b7ad4]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-5a7b7ad4]{opacity:0}",
+  inject("data-v-11ec59ed_0", {
+    source: ".zoom-on-hover[data-v-11ec59ed]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-11ec59ed]{width:100%}.zoom-on-hover .zoom[data-v-11ec59ed]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-11ec59ed]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-11ec59ed]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -306,7 +308,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-5a7b7ad4";
+var __vue_scope_id__ = "data-v-11ec59ed";
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;
