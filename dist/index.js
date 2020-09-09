@@ -1,5 +1,5 @@
 /*!
- * @rundik/vue-zoom-on-hover v1.0.0
+ * vue-zoom-on-hover v1.0.2
  * (c) Ivan Alexandrov
  * Released under the GPL-3.0 License.
  */
@@ -17,7 +17,7 @@
 //
 //
 var script = {
-  props: ["imgNormal", "imgZoom", "scale", "disabled"],
+  props: ["imgNormal", "imgZoom", "scale", "disabled", "altText"],
   data: function data() {
     return {
       scaleFactor: 1,
@@ -271,13 +271,15 @@ var __vue_render__ = function __vue_render__() {
     ref: "normal",
     staticClass: "normal",
     attrs: {
-      "src": _vm.imgNormal
+      "src": _vm.imgNormal,
+      "alt": _vm.altText
     }
   }), _vm._v(" "), _c('img', {
     ref: "zoom",
     staticClass: "zoom",
     attrs: {
-      "src": _vm.imgZoom || _vm.imgNormal
+      "src": _vm.imgZoom || _vm.imgNormal,
+      "alt": _vm.altText
     }
   })]);
 };
@@ -287,8 +289,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-52b6b210_0", {
-    source: ".zoom-on-hover[data-v-52b6b210]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-52b6b210]{width:100%}.zoom-on-hover .zoom[data-v-52b6b210]{position:absolute;opacity:0;transform-origin:top left}",
+  inject("data-v-2d44a9e0_0", {
+    source: ".zoom-on-hover[data-v-2d44a9e0]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-2d44a9e0]{width:100%}.zoom-on-hover .zoom[data-v-2d44a9e0]{position:absolute;opacity:0;transform-origin:top left}",
     map: undefined,
     media: undefined
   });
@@ -296,7 +298,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-52b6b210";
+var __vue_scope_id__ = "data-v-2d44a9e0";
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;
