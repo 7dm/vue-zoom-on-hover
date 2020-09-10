@@ -8,13 +8,13 @@
     @pointerenter="zoom"
     @pointerleave="unzoom"
   >
-    <img class="normal" ref="normal" :src="imgNormal" />
-    <img class="zoom" ref="zoom" :src="imgZoom || imgNormal" />
+    <img class="normal" ref="normal" :src="imgNormal" :alt="altText" />
+    <img class="zoom" ref="zoom" :src="imgZoom || imgNormal" :alt="altText" />
   </div>
 </template>
 <script>
 export default {
-  props: ["imgNormal", "imgZoom", "scale", "disabled"],
+  props: ["imgNormal", "imgZoom", "scale", "disabled", "altText"],
   data() {
     return {
       scaleFactor: 1,
