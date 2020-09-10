@@ -1,5 +1,5 @@
 /*!
- * @rundik/vue-zoom-on-hover v1.0.0
+ * vue-zoom-on-hover v1.0.2
  * (c) Ivan Alexandrov
  * Released under the GPL-3.0 License.
  */
@@ -16,12 +16,16 @@
 //
 //
 //
+//
+//
+//
 var script = {
   props: ["imgNormal", "imgZoom", "scale", "disabled"],
   data: function data() {
     return {
       scaleFactor: 1,
-      resizeCheckInterval: null
+      resizeCheckInterval: null,
+      zoomed: false
     };
   },
   methods: {
@@ -36,21 +40,24 @@ var script = {
         x: rect.left + scrollLeft
       };
     },
+    touchzoom: function touchzoom(event) {
+      if (this.disabled) return;
+      this.zoomed = event.type === "pointerover";
+      this.move(event);
+    },
     zoom: function zoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 1;
-      this.$refs.normal.style.opacity = 0;
+      this.zoomed = true;
     },
     unzoom: function unzoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 0;
-      this.$refs.normal.style.opacity = 1;
+      this.zoomed = false;
     },
     move: function move(event) {
-      if (this.disabled) return;
-      var offset = this.pageOffset(this.$el);
       var zoom = this.$refs.zoom;
       var normal = this.$refs.normal;
+      if (this.disabled || !this.zoomed || !zoom || !normal) return;
+      var offset = this.pageOffset(this.$el);
       var relativeX = event.clientX - offset.x + window.pageXOffset;
       var relativeY = event.clientY - offset.y + window.pageYOffset;
       var normalFactorX = relativeX / normal.offsetWidth;
@@ -262,10 +269,15 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "zoom-on-hover",
+    "class": {
+      zoomed: _vm.zoomed
+    },
     on: {
-      "mousemove": _vm.move,
-      "mouseenter": _vm.zoom,
-      "mouseleave": _vm.unzoom
+      "pointerover": _vm.touchzoom,
+      "pointerout": _vm.touchzoom,
+      "pointermove": _vm.move,
+      "pointerenter": _vm.zoom,
+      "pointerleave": _vm.unzoom
     }
   }, [_c('img', {
     ref: "normal",
@@ -287,8 +299,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-52b6b210_0", {
-    source: ".zoom-on-hover[data-v-52b6b210]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-52b6b210]{width:100%}.zoom-on-hover .zoom[data-v-52b6b210]{position:absolute;opacity:0;transform-origin:top left}",
+  inject("data-v-11ec59ed_0", {
+    source: ".zoom-on-hover[data-v-11ec59ed]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-11ec59ed]{width:100%}.zoom-on-hover .zoom[data-v-11ec59ed]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-11ec59ed]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-11ec59ed]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -296,7 +308,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-52b6b210";
+var __vue_scope_id__ = "data-v-11ec59ed";
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;

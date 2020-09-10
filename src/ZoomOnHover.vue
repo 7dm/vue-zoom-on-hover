@@ -1,9 +1,12 @@
 <template>
   <div
     class="zoom-on-hover"
-    @mousemove="move"
-    @mouseenter="zoom"
-    @mouseleave="unzoom"
+    v-bind:class="{ zoomed }"
+    @pointerover="touchzoom"
+    @pointerout="touchzoom"
+    @pointermove="move"
+    @pointerenter="zoom"
+    @pointerleave="unzoom"
   >
     <img class="normal" ref="normal" :src="imgNormal" />
     <img class="zoom" ref="zoom" :src="imgZoom || imgNormal" />
@@ -15,7 +18,8 @@ export default {
   data() {
     return {
       scaleFactor: 1,
-      resizeCheckInterval: null
+      resizeCheckInterval: null,
+      zoomed: false,
     };
   },
   methods: {
@@ -30,21 +34,24 @@ export default {
         x: rect.left + scrollLeft
       };
     },
+    touchzoom: function (event) {
+      if (this.disabled) return;
+      this.zoomed = event.type === "pointerover";
+      this.move(event);
+    },
     zoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 1;
-      this.$refs.normal.style.opacity = 0;
+      this.zoomed = true;
     },
     unzoom() {
       if (this.disabled) return;
-      this.$refs.zoom.style.opacity = 0;
-      this.$refs.normal.style.opacity = 1;
+      this.zoomed = false;
     },
     move: function(event) {
-      if (this.disabled) return;
-      let offset = this.pageOffset(this.$el);
       let zoom = this.$refs.zoom;
       let normal = this.$refs.normal;
+      if (this.disabled || !this.zoomed || !zoom || !normal) return;
+      let offset = this.pageOffset(this.$el);
       let relativeX = event.clientX - offset.x + window.pageXOffset;
       let relativeY = event.clientY - offset.y + window.pageYOffset;
       let normalFactorX = relativeX / normal.offsetWidth;
@@ -121,5 +128,11 @@ export default {
   position: absolute;
   opacity: 0;
   transform-origin: top left;
+}
+.zoom-on-hover.zoomed .zoom {
+  opacity: 1;
+}
+.zoom-on-hover.zoomed .normal {
+  opacity: 0;
 }
 </style>
