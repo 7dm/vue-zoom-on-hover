@@ -1,6 +1,6 @@
 {
   "name": "vue-zoom-on-hover",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue.js component that shows the full image or a scaled image in the image area on hover",
   "main": "./dist/index.js",
   "scripts": {
@@ -21,10 +21,13 @@
     "dist/*"
   ],
   "devDependencies": {
-    "bili": "^4.8.0",
+    "bili": "^4.10.1",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-vue": "^5.0.1",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10"
+    "rollup-plugin-vue": "^5.1.9",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "dependencies": {
+    "rollup-plugin-postcss": "^3.1.8"
   }
 }
