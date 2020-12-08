@@ -11,7 +11,9 @@ module.exports = {
       "cjs",
       "cjs-min",
       "esm",
-      "esm-min"
+      "esm-min",
+      "umd",
+      "umd-min"
     ]
   },
   plugins: {
