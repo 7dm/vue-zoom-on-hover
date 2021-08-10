@@ -8,13 +8,36 @@
     @pointerenter="zoom"
     @pointerleave="unzoom"
   >
-    <v-img class="normal" ref="normal" :src="imgNormal" :alt="altText" ></v-img>
-    <v-img class="zoom" ref="zoom" :src="imgZoom || imgNormal" :alt="altText" ></v-img>
+    <v-img
+      class="normal"
+      ref="normal"
+      :src="imgNormal"
+      :alt="altText"
+      :height="height"
+      :contain="contain"
+    ></v-img>
+
+    <v-img
+      class="zoom"
+      ref="zoom"
+      :src="imgZoom || imgNormal"
+      :alt="altText"
+      :height="height"
+      :contain="contain"
+    ></v-img>
   </div>
 </template>
 <script>
 export default {
-  props: ["imgNormal", "imgZoom", "scale", "disabled", "altText"],
+  props: [
+    "imgNormal",
+    "imgZoom",
+    "scale",
+    "disabled",
+    "altText",
+    "height",
+    "contain",
+  ],
   data() {
     return {
       scaleFactor: 1,
@@ -31,10 +54,10 @@ export default {
         scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       return {
         y: rect.top + scrollTop,
-        x: rect.left + scrollLeft
+        x: rect.left + scrollLeft,
       };
     },
-    touchzoom: function (event) {
+    touchzoom: function(event) {
       if (this.disabled) return;
       this.zoomed = event.type === "pointerover";
       this.move(event);
@@ -94,11 +117,11 @@ export default {
             width: normal.width,
             height: normal.height,
             fullWidth: normal.naturalWidth,
-            fullHeight: normal.naturalHeight
+            fullHeight: normal.naturalHeight,
           });
         }
       }, 1000);
-    }
+    },
   },
   mounted() {
     if (this.$props.scale) {
@@ -113,7 +136,7 @@ export default {
   },
   beforeDestroy() {
     this.resizeCheckInterval && clearInterval(this.resizeCheckInterval);
-  }
+  },
 };
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 /*!
- * vue-zoom-on-hover v1.0.4
+ * vue-zoom-on-hover v1.0.5
  * (c) Ivan Alexandrov
  * Released under the GPL-3.0 License.
  */
@@ -19,8 +19,23 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
-  props: ["imgNormal", "imgZoom", "scale", "disabled", "altText"],
+  props: ["imgNormal", "imgZoom", "scale", "disabled", "altText", "height", "contain"],
   data: function data() {
     return {
       scaleFactor: 1,
@@ -279,21 +294,25 @@ var __vue_render__ = function __vue_render__() {
       "pointerenter": _vm.zoom,
       "pointerleave": _vm.unzoom
     }
-  }, [_c('img', {
+  }, [_c('v-img', {
     ref: "normal",
     staticClass: "normal",
     attrs: {
       "src": _vm.imgNormal,
-      "alt": _vm.altText
+      "alt": _vm.altText,
+      "height": _vm.height,
+      "contain": _vm.contain
     }
-  }), _vm._v(" "), _c('img', {
+  }), _vm._v(" "), _c('v-img', {
     ref: "zoom",
     staticClass: "zoom",
     attrs: {
       "src": _vm.imgZoom || _vm.imgNormal,
-      "alt": _vm.altText
+      "alt": _vm.altText,
+      "height": _vm.height,
+      "contain": _vm.contain
     }
-  })]);
+  })], 1);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -301,8 +320,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0ff054f9_0", {
-    source: ".zoom-on-hover[data-v-0ff054f9]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-0ff054f9]{width:100%}.zoom-on-hover .zoom[data-v-0ff054f9]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-0ff054f9]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-0ff054f9]{opacity:0}",
+  inject("data-v-0daf447f_0", {
+    source: ".zoom-on-hover[data-v-0daf447f]{position:relative;overflow:hidden}.zoom-on-hover .normal[data-v-0daf447f]{width:100%}.zoom-on-hover .zoom[data-v-0daf447f]{position:absolute;opacity:0;transform-origin:top left}.zoom-on-hover.zoomed .zoom[data-v-0daf447f]{opacity:1}.zoom-on-hover.zoomed .normal[data-v-0daf447f]{opacity:0}",
     map: undefined,
     media: undefined
   });
@@ -310,7 +329,7 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-0ff054f9";
+var __vue_scope_id__ = "data-v-0daf447f";
 /* module identifier */
 
 var __vue_module_identifier__ = undefined;
