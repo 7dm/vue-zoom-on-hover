@@ -8,8 +8,8 @@
     @pointerenter="zoom"
     @pointerleave="unzoom"
   >
-    <img class="normal" ref="normal" :src="imgNormal" :alt="altText" />
-    <img class="zoom" ref="zoom" :src="imgZoom || imgNormal" :alt="altText" />
+    <v-img class="normal" ref="normal" :src="imgNormal" :alt="altText" ></v-img>
+    <v-img class="zoom" ref="zoom" :src="imgZoom || imgNormal" :alt="altText" ></v-img>
   </div>
 </template>
 <script>
